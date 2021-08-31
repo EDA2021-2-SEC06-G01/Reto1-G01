@@ -46,9 +46,23 @@ def loadData(catalog):
     """
     controller.loadData(catalog)
 
-def print_lista_cronológica(lst):
+def printArtistasCronologicos(anio_i,anio_f):
     pass
 
+def printAdquisicionesCronologicas(anio_i,anio_f):
+    pass
+
+def printObrasArtistaTecnica(nombre):
+    pass
+
+def printObrasNacionalidad(obras):
+    pass
+
+def printTrasportarObras(departamento):
+    pass
+
+def printNuevaProposicion(anio_i,anio_f,area_disponible):
+    pass
 
 def printMenu():
     print("Bienvenido")
@@ -77,14 +91,37 @@ while True:
         anio_i = input("Ingrese el año de inicio: ")
         anio_f = input("Ingrese el año final: ")
         lista = controller.artistas_cronologico(anio_i,anio_f)
-        print(print_lista_cronológica)
+        printArtistasCronologicos(anio_i,anio_f)
 
     elif int(inputs[0]) == 3:
         fecha_i = input("Ingrese la fecha inicia: ")
         fecha_f = input("Ingrese la fecha final: ")
         lista = controller.adquisiciones_cronologico(anio_i,anio_f)
-        print(print_lista_cronológica)
+        printAdquisicionesCronologicas(anio_i,anio_f)
 
+    elif int(inputs[0]) == 4:
+        nombre_artista = input("Ingrese el nombre del artista: ")
+        lista = controller.artistas_tecnica(nombre_artista)
+        printObrasArtistaTecnica(nombre_artista)
+
+    elif int(inputs[0]) == 5:
+        obras = input("Ingrese la nacionalidad: ")
+        lista = controller.obras_nacionalidad(obras)
+        printObrasNacionalidad(obras)
+
+    elif int(inputs[0]) == 6:
+        departamento = input("Ingrese el Departamento del museo del cual se transportan las obras: ")
+        lista = controller.transporte_obras(departamento)
+        printTrasportarObras(departamento)
+
+    elif int(inputs[0]) == 7:
+        anio_i = input("Ingrese el año inicial de las obras: ")
+        anio_f = input("Ingrese el año final de las obras: ")
+        area_disponible = input("Ingrese cuanta area (m^2) esta disponible para los objetos planos (cudros y fotos): ")
+        anio_inicial = controller.proposicion_exposicion(catalog, anio_i)
+        anio_final = controller.proposicion_exposicion(catalog, anio_f)
+        area = controller.proposicion_exposicion(catalog, area_disponible)
+        printNuevaProposicion(anio_i,anio_f,area_disponible)
 
     else:
         sys.exit(0)
