@@ -43,33 +43,53 @@ def newCatalog():
                'Artwork': None,}
 
     catalog['Artsit'] = lt.newList('ARRAY_LIST',
-                                    cmpfunction=compareArtist)
+                                    cmpfunction=compare)
     catalog['Artwork'] = lt.newList('ARRAY_LIST',
-                                    cmpfunction=compareArtwork)
+                                    cmpfunction=compare)
     return catalog
 
 # Funciones para agregar informacion al catalogo
 
+def addArtist(catalog, artist):
+    lt.addLast(catalog["Artist"],artist)
+
+def addArtwork(catalog,artwork):
+    lt.addLast(catalog["Artwork"],artwork)
+    autors = artwork["Artists"]
+    for autor in autors:
+        posartist = lt.isPresent(),autor)
+        if posartist > 0:
+            lt.addLast(autor["obras"],artwork)
+        else:
+            artist = newArtist(autor)
+            lt.addLast(catalog["Artist"],artist)
+
+
+
 # Funciones para creacion de datos
 
-def newArtist(name):
+def newArtist(nombre):
 
-    Artist = {'name': "", "Artwork": None,}
-    Artist['name'] = name
-    Artist['Artwork'] = lt.newList('ARRAY_LIST')
+    Artist = {'name': "", "id":-1,"nacionalidad":"","nacimiento":0,"muerte":0}
+    Artist['obras'] = lt.newList('ARRAY_LIST')
     return Artist
 
 
-def newArtwork(name, id):
+def newArtwork(nombre):
 
-    Artwork = {'name': '', 'Artwork_id': ''}
-    Artwork['name'] = name
-    Artwork['Artwork_id'] = id
+    Artwork = {'name': '', 'id': '',"artist":None,"medio":"","dimensiones":"","clasificacion":"","fecha":""}
+    Artwork["artists"] = lt.newList("ARRAY_LIST")
     return Artwork
 
 
 # Funciones de consulta
 
 # Funciones utilizadas para comparar elementos dentro de una lista
+
+def compare(artistid,artist):
+if (artistid in artist['id']):
+        return 0
+    return -1
+
 
 # Funciones de ordenamiento
