@@ -51,13 +51,13 @@ def newCatalog():
 # Funciones para agregar informacion al catalogo
 
 def addArtist(catalog, artist):
-    lt.addLast(catalog["Artist"],artist)
+    lt.addLast(catalog["Artist"],artist)    
 
 def addArtwork(catalog,artwork):
     lt.addLast(catalog["Artwork"],artwork)
     autors = artwork["Artists"]
     for autor in autors:
-        posartist = lt.isPresent(),autor)
+        posartist = lt.isPresent(autor)
         if posartist > 0:
             lt.addLast(autor["obras"],artwork)
         else:
@@ -87,7 +87,7 @@ def newArtwork(nombre):
 # Funciones utilizadas para comparar elementos dentro de una lista
 
 def compare(artistid,artist):
-if (artistid in artist['id']):
+    if (artistid in artist['id']):
         return 0
     return -1
 
