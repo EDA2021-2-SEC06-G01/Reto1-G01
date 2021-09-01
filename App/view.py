@@ -86,6 +86,7 @@ while True:
         print("Cargando información de los archivos ....")
         catalog = initCatalog()
         loadData(catalog)
+        print("Se cargaron exitosamente los datos")
 
     elif int(inputs[0]) == 2:
         anio_i = input("Ingrese el año de inicio: ")

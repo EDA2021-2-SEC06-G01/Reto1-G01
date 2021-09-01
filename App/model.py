@@ -42,7 +42,7 @@ def newCatalog():
     catalog = {'Artist': None,
                'Artwork': None,}
 
-    catalog['Artsit'] = lt.newList('ARRAY_LIST',
+    catalog['Artist'] = lt.newList('ARRAY_LIST',
                                     cmpfunction=compare)
     catalog['Artwork'] = lt.newList('ARRAY_LIST',
                                     cmpfunction=compare)
@@ -55,14 +55,14 @@ def addArtist(catalog, artist):
 
 def addArtwork(catalog,artwork):
     lt.addLast(catalog["Artwork"],artwork)
-    autors = artwork["Artists"]
+    autors = artwork["artists"].split(",")
     for autor in autors:
         posartist = lt.isPresent(autor)
         if posartist > 0:
             lt.addLast(autor["obras"],artwork)
         else:
             artist = newArtist(autor)
-            lt.addLast(catalog["Artist"],artist)
+            lt.addLast(catalog["artists"],artist)
 
 
 
@@ -77,7 +77,7 @@ def newArtist(nombre):
 
 def newArtwork(nombre):
 
-    Artwork = {'name': '', 'id': '',"artist":None,"medio":"","dimensiones":"","clasificacion":"","fecha":""}
+    Artwork = {'name': '', 'id': '',"artists":None,"medio":"","dimensiones":"","clasificacion":"","fecha":""}
     Artwork["artists"] = lt.newList("ARRAY_LIST")
     return Artwork
 
