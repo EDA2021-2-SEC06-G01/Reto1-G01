@@ -61,17 +61,15 @@ def addArtwork(catalog,artwork):
 
 # Funciones para creacion de datos
 
-def newArtist(nombre):
+def newArtist():
 
-    Artist = {'name': "", "id":-1,"nacionalidad":"","nacimiento":0,"muerte":0}
-    Artist['obras'] = lt.newList('ARRAY_LIST')
+    Artist = {}
     return Artist
 
 
-def newArtwork(nombre):
+def newArtwork():
 
-    Artwork = {'name': '', 'id': '',"artists":None,"medio":"","dimensiones":"","clasificacion":"","fecha":""}
-    Artwork["artists"] = lt.newList("ARRAY_LIST")
+    Artwork = {}
     return Artwork
 
 
