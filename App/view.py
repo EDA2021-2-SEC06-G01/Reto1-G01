@@ -87,6 +87,8 @@ while True:
         catalog = initCatalog()
         loadData(catalog)
         print("Se cargaron exitosamente los datos")
+        print("Aritistas cargados: "+ str(lt.size(catalog["Artist"])))
+        print("Obras cargadas: "+ str(lt.size(catalog["Artwork"])))
 
     elif int(inputs[0]) == 2:
         anio_i = input("Ingrese el año de inicio: ")

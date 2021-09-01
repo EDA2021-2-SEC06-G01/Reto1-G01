@@ -55,14 +55,7 @@ def addArtist(catalog, artist):
 
 def addArtwork(catalog,artwork):
     lt.addLast(catalog["Artwork"],artwork)
-    autors = artwork["artists"].split(",")
-    for autor in autors:
-        posartist = lt.isPresent(autor)
-        if posartist > 0:
-            lt.addLast(autor["obras"],artwork)
-        else:
-            artist = newArtist(autor)
-            lt.addLast(catalog["artists"],artist)
+
 
 
 

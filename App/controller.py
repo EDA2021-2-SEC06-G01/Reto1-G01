@@ -41,7 +41,6 @@ def loadData(catalog):
 
     loadArtist(catalog)
     loadArtworks(catalog)
-    sortBooks(catalog)
 
 
 def loadArtist(catalog):
@@ -60,7 +59,6 @@ def loadArtworks(catalog):
 
 # Funciones de ordenamiento
 
-def sortBooks(catalog):
-    model.sortBooks(catalog)
+
 
 # Funciones de consulta sobre el catálogo
