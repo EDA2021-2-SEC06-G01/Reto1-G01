@@ -122,6 +122,7 @@ def newArtwork():
 # Funciones de consulta
 
 def binary_search(arr, low, high, x):
+    #Tomado de https://www.geeksforgeeks.org/python-program-for-binary-search/
  
     # Check base case
     if high >= low:
