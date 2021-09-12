@@ -95,7 +95,8 @@ def addArtwork(catalog,artwork):
 
     for artista in artistas:
         artista = int(artista)
-        posicion = lt.isPresent(catalog["Artist"],artista)
+        #posicion = lt.isPresent(catalog["Artist"],artista) #busqueda binaria?
+        posicion = binary_search(catalog["Artist"]["elements"],0,lt.size(catalog["Artist"]),artista)
         diccionario = catalog["Artist"]["elements"][posicion-1]["Obras"]
         lt.addLast(diccionario,obra)
 
@@ -120,6 +121,29 @@ def newArtwork():
 
 # Funciones de consulta
 
+def binary_search(arr, low, high, x):
+ 
+    # Check base case
+    if high >= low:
+ 
+        mid = (high + low) // 2
+ 
+        # If element is present at the middle itself
+        if arr[mid]["Const.id"] == x:
+            return mid
+ 
+        # If element is smaller than mid, then it can only
+        # be present in left subarray
+        elif arr[mid]["Const.id"] > x:
+            return binary_search(arr, low, mid - 1, x)
+ 
+        # Else the element can only be present in right subarray
+        else:
+            return binary_search(arr, mid + 1, high, x)
+ 
+    else:
+        # Element is not present in the array
+        return -1
 
 # Funciones utilizadas para comparar elementos dentro de una lista
 
