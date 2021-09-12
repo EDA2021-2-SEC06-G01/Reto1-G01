@@ -52,16 +52,54 @@ def newCatalog():
 
 def addArtist(catalog, artist):
     artista = {}
-    artista["Const.id"] = artist["ConstituentID"]
+    artista["Const.id"] = int(artist["ConstituentID"])
     artista["Nombre"] = artist["DisplayName"]
     artista["Nacionalidad"] = artist["Nationality"]
     artista["Nacimiento"] = artist["BeginDate"]
     artista["Muerte"] = artist["EndDate"]
+    artista["Obras"] = lt.newList("ARRAY_LIST",cmpfunction=compare)
 
     lt.addLast(catalog["Artist"],artista)    
 
 def addArtwork(catalog,artwork):
-    lt.addLast(catalog["Artwork"],artwork)
+    obra = {}
+    obra["id"]=artwork["ObjectID"]
+    obra["Titulo"] = artwork["Title"]
+    obra["Medio"] = artwork["Medium"]
+    obra["Fecha_ad"] = artwork["DateAcquired"]
+
+    if artwork["Depth (cm)"] == "":
+        obra["Profundidad"] = 0
+    else:
+        obra["Profundidad"] = artwork["Depth (cm)"]
+
+    if artwork["Height (cm)"] == "":
+        obra["Altura"] = 0
+    else:
+        obra["Altura"] = artwork["Height (cm)"]
+
+    if artwork["Weight (kg)"] == "":
+        obra["Peso"] = 0
+    else:
+        obra["Peso"] = artwork["Weight (kg)"]
+
+    if artwork["Width (cm)"] == "":
+        obra["Ancho"] = 0
+    else:
+        obra["Ancho"] = artwork["Width (cm)"]
+    
+    artistas = artwork["ConstituentID"]
+    artistas = artistas.replace("[","")
+    artistas = artistas.replace("]","")
+    artistas = artistas.split(",")
+
+    for artista in artistas:
+        artista = int(artista)
+        posicion = lt.isPresent(catalog["Artist"],artista)
+        diccionario = catalog["Artist"]["elements"][posicion-1]["Obras"]
+        lt.addLast(diccionario,obra)
+
+    lt.addLast(catalog["Artwork"],obra)
 
 
 
@@ -82,12 +120,18 @@ def newArtwork():
 
 # Funciones de consulta
 
+
 # Funciones utilizadas para comparar elementos dentro de una lista
 
-def compare(artistid,artist):
-    if (artistid in artist['id']):
+#def compare(artist1,artist2):
+    if (artist1['Const.id'] in artist2):
         return 0
     return -1
 
+def compare(artist1,artist):
+    artist = artist["Const.id"]
+    if artist1 == artist:
+        return 0
+    return -1
 
 # Funciones de ordenamiento

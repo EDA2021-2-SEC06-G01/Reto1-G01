@@ -23,7 +23,7 @@
 import config as cf
 import model
 import csv
-
+from DISClib.Algorithms.Sorting import quicksort
 
 """
 El controlador se encarga de mediar entre la vista y el modelo.
@@ -38,8 +38,8 @@ def initCatalog():
 # Funciones para la carga de datos
 
 def loadData(catalog):
-
     loadArtist(catalog)
+    quicksort.sort(catalog["Artist"],comparar_artistas_creciente)
     loadArtworks(catalog)
 
 
@@ -58,6 +58,12 @@ def loadArtworks(catalog):
         model.addArtwork(catalog, Artwork)
 
 # Funciones de ordenamiento
+
+def comparar_artistas_creciente(artista1,artista2):
+    if artista1["Const.id"]<artista2["Const.id"]:
+        return True
+    else:
+        return False
 
 
 

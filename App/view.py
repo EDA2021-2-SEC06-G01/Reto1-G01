@@ -46,6 +46,7 @@ def loadData(catalog):
     """
     controller.loadData(catalog)
 
+
 def printArtistasCronologicos(anio_i,anio_f):
     pass
 
@@ -73,6 +74,7 @@ def printMenu():
     print("5-Clasificar las obras por la nacionalidad de sus creadores")
     print("6-Transportar obras de un departamento")
     print("7-Proponer una nueva exposición en el museo")
+    print("8-Salir")
 
 catalog = None
 
@@ -125,6 +127,9 @@ while True:
         anio_final = controller.proposicion_exposicion(catalog, anio_f)
         area = controller.proposicion_exposicion(catalog, area_disponible)
         printNuevaProposicion(anio_i,anio_f,area_disponible)
+    
+    elif int(inputs[0])==8:
+        break
 
     else:
         sys.exit(0)
