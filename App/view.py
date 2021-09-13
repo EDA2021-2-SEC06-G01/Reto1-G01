@@ -54,6 +54,7 @@ def loadData(catalog):
 
 def printArtistasCronologicos(lista):
     mensaje1 = "El número de aritistas en este rango es: " + str(lt.size(lista))
+    print(mensaje1)
 
     for i in range(0,3):
         incluir = lt.newList("ARRAY_LIST")
