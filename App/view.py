@@ -39,11 +39,11 @@ se hace la solicitud al controlador para ejecutar la
 operación solicitada
 """
 
-def initCatalog():
+def initCatalog(list_type):
     """
     Inicializa el catalogo
     """
-    return controller.initCatalog()
+    return controller.initCatalog(list_type)
 
 def loadData(catalog):
     """
@@ -115,8 +115,22 @@ while True:
     printMenu()
     inputs = input('Seleccione una opción para continuar\n')
     if int(inputs[0]) == 1:
+        print("Seleccione el tipo de lista que desea crear dentro del catálogo: ")
+        print("1-Array list")
+        print("2-Single linked list")
+        input2=int(input())
+        list_type = None
+        if input2==1:
+            list_type = "ARRAY_LIST"
+        elif input2 == 2:
+            list_type = "SINGLE_LINKED"
+
+        else:
+            print("Seleccione una opcion válida")
+            break
+
         print("Cargando información de los archivos ....")
-        catalog = initCatalog()
+        catalog = initCatalog(list_type)
         loadData(catalog)
         print("Se cargaron exitosamente los datos")
         print("Aritistas cargados: "+ str(lt.size(catalog["Artist"])))

@@ -37,14 +37,14 @@ los mismos.
 
 # Construccion de modelos
 
-def newCatalog():
+def newCatalog(list_type):
     
     catalog = {'Artist': None,
                'Artwork': None,}
 
-    catalog['Artist'] = lt.newList('ARRAY_LIST',
+    catalog['Artist'] = lt.newList(list_type,
                                     cmpfunction=compare)
-    catalog['Artwork'] = lt.newList('ARRAY_LIST',
+    catalog['Artwork'] = lt.newList(list_type,
                                     cmpfunction=compare)
     return catalog
 

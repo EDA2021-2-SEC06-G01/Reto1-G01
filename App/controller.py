@@ -23,7 +23,7 @@
 import config as cf
 import model
 import csv
-from DISClib.Algorithms.Sorting import quicksort
+from DISClib.Algorithms.Sorting import mergesort
 from DISClib.Algorithms.Sorting import shellsort
 from DISClib.ADT import list as lt
 
@@ -33,15 +33,15 @@ El controlador se encarga de mediar entre la vista y el modelo.
 
 # Inicialización del Catálogo de libros
 
-def initCatalog():
-    catalog = model.newCatalog()
+def initCatalog(list_type):
+    catalog = model.newCatalog(list_type)
     return catalog
 
 # Funciones para la carga de datos
 
 def loadData(catalog):
     loadArtist(catalog)
-    quicksort.sort(catalog["Artist"],comparar_artistas_creciente)
+    mergesort.sort(catalog["Artist"],comparar_artistas_creciente)
     loadArtworks(catalog)
 
 
