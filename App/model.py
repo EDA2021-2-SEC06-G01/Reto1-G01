@@ -96,12 +96,8 @@ def addArtwork(catalog,artwork):
 
     for artista in artistas:
         artista = int(artista)
-        #posicion = lt.isPresent(catalog["Artist"],artista) #busqueda binaria?
         posicion = None
-        if catalog["Artist"]["type"] == "ARRAY_LIST":
-            posicion = binary_search(catalog["Artist"]["elements"],0,lt.size(catalog["Artist"]),"Const.id",artista)
-        else:
-            posicion = busqueda_artista_single(catalog["Artist"],artista)
+        posicion = binary_search(catalog["Artist"],0,lt.size(catalog["Artist"]),"Const.id",artista)
         diccionario = lt.getElement(catalog["Artist"],posicion)["Obras"]
         lt.addLast(diccionario,obra)
 
@@ -126,7 +122,7 @@ def newArtwork():
 
 # Funciones de consulta
 
-def busqueda_artista_single(lista,artista):
+#def busqueda_artista_single(lista,artista):
     posicion = None
     for i in range(lt.size(lista)):
         if lt.getElement(lista,i)["Const.id"] == artista:
@@ -143,15 +139,15 @@ def binary_search(arr, low, high,key, x):
         mid = (high + low) // 2
  
         # If element is present at the middle itself
-        if arr[mid][key] == x:
+        if lt.getElement(arr,mid)[key] == x:
             #Revisar si hay duplicados
-            while arr[mid][key] == arr[mid-1][key]:
+            while lt.getElement(arr,mid)[key] == lt.getElement(arr,mid-1)[key]:
                 mid -= 1
             return mid
  
         # If element is smaller than mid, then it can only
         # be present in left subarray
-        elif arr[mid][key] > x:
+        elif lt.getElement(arr,mid)[key] > x:
             return binary_search(arr, low, mid - 1,key, x)
  
         # Else the element can only be present in right subarray
@@ -163,11 +159,6 @@ def binary_search(arr, low, high,key, x):
         return -1
 
 # Funciones utilizadas para comparar elementos dentro de una lista
-
-#def compare(artist1,artist2):
-    if (artist1['Const.id'] in artist2):
-        return 0
-    return -1
 
 def compare(artist1,artist):
     artist = artist["Const.id"]
