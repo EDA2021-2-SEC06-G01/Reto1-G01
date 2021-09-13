@@ -57,7 +57,7 @@ def addArtist(catalog, artist):
     artista["Nacionalidad"] = artist["Nationality"]
     artista["Nacimiento"] = int(artist["BeginDate"])
     artista["Muerte"] = artist["EndDate"]
-    artista["Obras"] = lt.newList("ARRAY_LIST",cmpfunction=compare)
+    #artista["Obras"] = lt.newList("ARRAY_LIST",cmpfunction=compare)
     artista["Genero"] = artist["Gender"]
 
     lt.addLast(catalog["Artist"],artista)    
@@ -94,12 +94,12 @@ def addArtwork(catalog,artwork):
     artistas = artistas.replace("]","")
     artistas = artistas.split(",")
 
-    for artista in artistas:
-        artista = int(artista)
-        posicion = None
-        posicion = binary_search(catalog["Artist"],0,lt.size(catalog["Artist"]),"Const.id",artista)
-        diccionario = lt.getElement(catalog["Artist"],posicion)["Obras"]
-        lt.addLast(diccionario,obra)
+   # for artista in artistas:
+        #artista = int(artista)
+        #posicion = None
+        #posicion = binary_search(catalog["Artist"],0,lt.size(catalog["Artist"]),"Const.id",artista)
+        #diccionario = lt.getElement(catalog["Artist"],posicion)["Obras"]
+        #lt.addLast(diccionario,obra)
 
     lt.addLast(catalog["Artwork"],obra)
 

@@ -41,7 +41,7 @@ def initCatalog(list_type):
 
 def loadData(catalog):
     loadArtist(catalog)
-    mergesort.sort(catalog["Artist"],comparar_artistas_creciente)
+    #mergesort.sort(catalog["Artist"],comparar_artistas_creciente)
     loadArtworks(catalog)
 
 
