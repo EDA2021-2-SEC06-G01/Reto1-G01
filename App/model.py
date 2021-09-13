@@ -25,10 +25,12 @@
  """
 
 
+from DISClib.DataStructures.arraylist import getElement
 import config as cf
 from DISClib.ADT import list as lt
 from DISClib.Algorithms.Sorting import shellsort as sa
 assert cf
+from datetime import datetime 
 
 """
 Se define la estructura de un catálogo de videos. El catálogo tendrá dos listas, una para los videos, otra para las categorias de
@@ -67,7 +69,10 @@ def addArtwork(catalog,artwork):
     obra["id"]=artwork["ObjectID"]
     obra["Titulo"] = artwork["Title"]
     obra["Medio"] = artwork["Medium"]
-    obra["Fecha_ad"] = artwork["DateAcquired"]
+    if artwork["DateAcquired"] != "":
+        obra["Fecha_ad"] = datetime.strptime(artwork["DateAcquired"],"%Y-%m-%d")
+    else:
+        obra["Fecha_ad"] = datetime.strptime("0001-01-01","%Y-%m-%d")
 
     if artwork["Depth (cm)"] == "":
         obra["Profundidad"] = 0
@@ -93,6 +98,8 @@ def addArtwork(catalog,artwork):
     artistas = artistas.replace("[","")
     artistas = artistas.replace("]","")
     artistas = artistas.split(",")
+
+    obra["Artistas"] = artistas
 
    # for artista in artistas:
         #artista = int(artista)
@@ -165,5 +172,12 @@ def compare(artist1,artist):
     if artist1 == artist:
         return 0
     return -1
+
+
+def comparedate(artwork1,artwork2):
+    if artwork1["Fecha_ad"] < artwork2["Fecha_ad"]:
+        return True
+    else:
+        return False
 
 # Funciones de ordenamiento

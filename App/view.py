@@ -137,10 +137,30 @@ while True:
         print("Obras cargadas: "+ str(lt.size(catalog["Artwork"])))
 
     elif int(inputs[0]) == 2:
-        anio_i = int(input("Ingrese el año de inicio: "))
-        anio_f = int(input("Ingrese el año final: "))
-        lista = controller.artistas_cronologico(anio_i,anio_f,catalog)
-        printArtistasCronologicos(lista)
+        print("Elija el tamaño de la muestra: ")
+        size = int(input())
+        sublist = controller.create_sublist(catalog["Artwork"],size)
+
+        print("Elija como organizar la sublista: ")
+        print("1-Insertion")
+        print("2-Shell")
+        print("3-Merge")
+        print("4-Quick")
+
+        sort_type = int(input())
+
+        if sort_type not in [1,2,3,4]:
+            print("Elija una opción válida")
+            break
+
+        resultado = controller.sortbydate(sublist,sort_type)
+
+        print("Timepo "+str(resultado[1]) + "mseg")
+
+        #anio_i = int(input("Ingrese el año de inicio: "))
+        #anio_f = int(input("Ingrese el año final: "))
+        #lista = controller.artistas_cronologico(anio_i,anio_f,catalog)
+        #printArtistasCronologicos(lista)
 
     elif int(inputs[0]) == 3:
         fecha_i = input("Ingrese la fecha inicia: ")

@@ -23,9 +23,13 @@
 import config as cf
 import model
 import csv
-from DISClib.Algorithms.Sorting import mergesort
+from DISClib.Algorithms.Sorting import insertionsort
 from DISClib.Algorithms.Sorting import shellsort
+from DISClib.Algorithms.Sorting import mergesort
+from DISClib.Algorithms.Sorting import quicksort
 from DISClib.ADT import list as lt
+import time
+
 
 """
 El controlador se encarga de mediar entre la vista y el modelo.
@@ -73,6 +77,22 @@ def comparar_artistas_cronologico_creciente(artista1,artista2):
     else:
         return False
 
+def sortbydate(list,sort_type):
+    start_time = time.process_time()
+    if sort_type == 1:
+        insertionsort.sort(list,model.comparedate)
+    elif sort_type == 2:
+        shellsort.sort(list,model.comparedate)
+    elif sort_type == 3:
+        mergesort.sort(list,model.comparedate)
+    else:
+        quicksort.sort(list,model.comparedate)
+    stop_time = time.process_time()
+    dtime = (stop_time-start_time)*1000
+    return list,dtime
+
+
+
 # Funciones de consulta sobre el catálogo
 def artistas_cronologico(anio_i,anio_f,datos):
     datos = datos["Artist"].copy()
@@ -88,4 +108,13 @@ def artistas_cronologico(anio_i,anio_f,datos):
         i += 1
 
     return lista
+
+def create_sublist(list,size):
+    if size < lt.size(list):
+        lista = lt.subList(list,0,size)
+        return lista
+    
+    else:
+        return -1
+
 
