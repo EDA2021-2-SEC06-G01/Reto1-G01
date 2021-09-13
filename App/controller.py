@@ -24,6 +24,8 @@ import config as cf
 import model
 import csv
 from DISClib.Algorithms.Sorting import quicksort
+from DISClib.Algorithms.Sorting import shellsort
+from DISClib.ADT import list as lt
 
 """
 El controlador se encarga de mediar entre la vista y el modelo.
@@ -65,6 +67,25 @@ def comparar_artistas_creciente(artista1,artista2):
     else:
         return False
 
-
+def comparar_artistas_cronologico_creciente(artista1,artista2):
+    if artista1["Nacimiento"]<artista2["Nacimiento"]:
+        return True
+    else:
+        return False
 
 # Funciones de consulta sobre el catálogo
+def artistas_cronologico(anio_i,anio_f,datos):
+    datos = datos["Artist"].copy()
+    shellsort.sort(datos,comparar_artistas_cronologico_creciente)
+    inicio = model.binary_search(datos["elements"],0,lt.size(datos),"Nacimiento",anio_i)
+
+    i = inicio
+    lista = lt.newList('ARRAY_LIST')
+
+    while datos["elements"][i]["Nacimiento"]<=anio_f and datos["elements"][i]["Nacimiento"] <= lt.lastElement(datos)["Nacimiento"]:
+        lt.addLast(lista,datos["elements"][i])
+
+        i += 1
+
+    return lista
+

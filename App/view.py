@@ -20,11 +20,16 @@
  * along withthis program.  If not, see <http://www.gnu.org/licenses/>.
  """
 
+
 import config as cf
 import sys
 import controller
 from DISClib.ADT import list as lt
 assert cf
+
+import sys
+default_limit = 1000
+sys.setrecursionlimit(default_limit*10)
 
 
 """
@@ -47,8 +52,32 @@ def loadData(catalog):
     controller.loadData(catalog)
 
 
-def printArtistasCronologicos(anio_i,anio_f):
-    pass
+def printArtistasCronologicos(lista):
+    mensaje1 = "El número de aritistas en este rango es: " + str(lt.size(lista))
+
+    for i in range(0,3):
+        incluir = lt.newList("ARRAY_LIST")
+        lt.addLast(incluir,lista["elements"][i]["Nombre"])
+        lt.addLast(incluir,lista["elements"][i]["Nacimiento"])
+        lt.addLast(incluir,lista["elements"][i]["Muerte"])
+        lt.addLast(incluir,lista["elements"][i]["Nacionalidad"])
+        lt.addLast(incluir,lista["elements"][i]["Genero"])
+
+        print(incluir["elements"])
+
+    for i in range(lt.size(lista)-3, lt.size(lista)):
+        incluir = lt.newList("ARRAY_LIST")
+        lt.addLast(incluir,lista["elements"][i]["Nombre"])
+        lt.addLast(incluir,lista["elements"][i]["Nacimiento"])
+        lt.addLast(incluir,lista["elements"][i]["Muerte"])
+        lt.addLast(incluir,lista["elements"][i]["Nacionalidad"])
+        lt.addLast(incluir,lista["elements"][i]["Genero"])
+
+        print(incluir["elements"])
+    
+    
+
+
 
 def printAdquisicionesCronologicas(anio_i,anio_f):
     pass
@@ -93,10 +122,10 @@ while True:
         print("Obras cargadas: "+ str(lt.size(catalog["Artwork"])))
 
     elif int(inputs[0]) == 2:
-        anio_i = input("Ingrese el año de inicio: ")
-        anio_f = input("Ingrese el año final: ")
-        lista = controller.artistas_cronologico(anio_i,anio_f)
-        printArtistasCronologicos(anio_i,anio_f)
+        anio_i = int(input("Ingrese el año de inicio: "))
+        anio_f = int(input("Ingrese el año final: "))
+        lista = controller.artistas_cronologico(anio_i,anio_f,catalog)
+        printArtistasCronologicos(lista)
 
     elif int(inputs[0]) == 3:
         fecha_i = input("Ingrese la fecha inicia: ")

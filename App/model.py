@@ -55,9 +55,10 @@ def addArtist(catalog, artist):
     artista["Const.id"] = int(artist["ConstituentID"])
     artista["Nombre"] = artist["DisplayName"]
     artista["Nacionalidad"] = artist["Nationality"]
-    artista["Nacimiento"] = artist["BeginDate"]
+    artista["Nacimiento"] = int(artist["BeginDate"])
     artista["Muerte"] = artist["EndDate"]
     artista["Obras"] = lt.newList("ARRAY_LIST",cmpfunction=compare)
+    artista["Genero"] = artist["Gender"]
 
     lt.addLast(catalog["Artist"],artista)    
 
@@ -96,7 +97,7 @@ def addArtwork(catalog,artwork):
     for artista in artistas:
         artista = int(artista)
         #posicion = lt.isPresent(catalog["Artist"],artista) #busqueda binaria?
-        posicion = binary_search(catalog["Artist"]["elements"],0,lt.size(catalog["Artist"]),artista)
+        posicion = binary_search(catalog["Artist"]["elements"],0,lt.size(catalog["Artist"]),"Const.id",artista)
         diccionario = catalog["Artist"]["elements"][posicion-1]["Obras"]
         lt.addLast(diccionario,obra)
 
@@ -121,8 +122,8 @@ def newArtwork():
 
 # Funciones de consulta
 
-def binary_search(arr, low, high, x):
-    #Tomado de https://www.geeksforgeeks.org/python-program-for-binary-search/
+def binary_search(arr, low, high,key, x):
+    #Tomado y modificado de https://www.geeksforgeeks.org/python-program-for-binary-search/
  
     # Check base case
     if high >= low:
@@ -130,17 +131,17 @@ def binary_search(arr, low, high, x):
         mid = (high + low) // 2
  
         # If element is present at the middle itself
-        if arr[mid]["Const.id"] == x:
+        if arr[mid][key] == x:
             return mid
  
         # If element is smaller than mid, then it can only
         # be present in left subarray
-        elif arr[mid]["Const.id"] > x:
-            return binary_search(arr, low, mid - 1, x)
+        elif arr[mid][key] > x:
+            return binary_search(arr, low, mid - 1,key, x)
  
         # Else the element can only be present in right subarray
         else:
-            return binary_search(arr, mid + 1, high, x)
+            return binary_search(arr, mid + 1, high,key, x)
  
     else:
         # Element is not present in the array
