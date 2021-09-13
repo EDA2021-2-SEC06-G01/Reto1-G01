@@ -1,0 +1,47 @@
+Máquina 1: Nicolás Palacios
+
+Procesador: Intel(R) Core(TM) i7-9750H CPU @ 2.60GHz   2.59 GHz
+Memoria RAM: 8.00 GB (7.84 GB usable)
+Sistema Operativo: Windows 10 Home Single Language
+
+Array
+
+Porcentaje de la muestra |   small  |  10%
+tamaño muestra           |
+insertion sort (ms)      |
+schell sort (ms)         |
+Quick sort (ms)          |
+Merge sort (ms)          | 
+
+single linked
+
+Porcentaje de la muestra |   small  |  10%
+tamaño muestra           |
+insertion sort (ms)      |
+schell sort (ms)         |
+Quick sort (ms)          |
+Merge sort (ms)          | 
+
+Máquina 2: Alejandro
+
+Procesador:
+Memoria RAM:
+Sistema Operativo:
+
+Array
+
+Porcentaje de la muestra |   small  |  10%
+tamaño muestra           |
+insertion sort (ms)      |
+schell sort (ms)         |
+Quick sort (ms)          |
+Merge sort (ms)          | 
+
+single linked
+
+Porcentaje de la muestra |   small  |  10%
+tamaño muestra           |
+insertion sort (ms)      |
+schell sort (ms)         |
+Quick sort (ms)          |
+Merge sort (ms)          | 
