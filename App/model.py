@@ -132,6 +132,9 @@ def binary_search(arr, low, high,key, x):
  
         # If element is present at the middle itself
         if arr[mid][key] == x:
+            #Revisar si hay duplicados
+            while arr[mid][key] == arr[mid-1][key]:
+                mid -= 1
             return mid
  
         # If element is smaller than mid, then it can only
