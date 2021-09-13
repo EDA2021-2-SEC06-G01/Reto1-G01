@@ -97,8 +97,12 @@ def addArtwork(catalog,artwork):
     for artista in artistas:
         artista = int(artista)
         #posicion = lt.isPresent(catalog["Artist"],artista) #busqueda binaria?
-        posicion = binary_search(catalog["Artist"]["elements"],0,lt.size(catalog["Artist"]),"Const.id",artista)
-        diccionario = catalog["Artist"]["elements"][posicion-1]["Obras"]
+        posicion = None
+        if catalog["Artist"]["type"] == "ARRAY_LIST":
+            posicion = binary_search(catalog["Artist"]["elements"],0,lt.size(catalog["Artist"]),"Const.id",artista)
+        else:
+            posicion = busqueda_artista_single(catalog["Artist"],artista)
+        diccionario = lt.getElement(catalog["Artist"],posicion)["Obras"]
         lt.addLast(diccionario,obra)
 
     lt.addLast(catalog["Artwork"],obra)
@@ -121,6 +125,14 @@ def newArtwork():
 
 
 # Funciones de consulta
+
+def busqueda_artista_single(lista,artista):
+    posicion = None
+    for i in range(lt.size(lista)):
+        if lt.getElement(lista,i)["Const.id"] == artista:
+            posicion = i
+            break
+    return posicion
 
 def binary_search(arr, low, high,key, x):
     #Tomado y modificado de https://www.geeksforgeeks.org/python-program-for-binary-search/
