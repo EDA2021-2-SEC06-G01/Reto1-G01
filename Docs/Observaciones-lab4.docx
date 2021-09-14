@@ -24,24 +24,24 @@ Merge sort (ms)          |   5.2    |  322.9
 
 Máquina 2: Alejandro
 
-Procesador:
-Memoria RAM:
-Sistema Operativo:
+Procesador: 1,4 GHz Intel Core i5
+Memoria RAM: 4 GB
+Sistema Operativo: macOS Mojave version 10.14.6
 
 Array
 
 Porcentaje de la muestra |   small  |  10%
-tamaño muestra           |
-insertion sort (ms)      |
-schell sort (ms)         |
-Quick sort (ms)          |
-Merge sort (ms)          | 
+tamaño muestra           |    100   |  10000
+insertion sort (ms)      |   13.3   |  910.63
+schell sort (ms)         |   3.67   |  47.2
+Quick sort (ms)          |   3.36   |  51.37
+Merge sort (ms)          |    4.5   |  47.11
 
 single linked
 
 Porcentaje de la muestra |   small  |  10%
-tamaño muestra           |
-insertion sort (ms)      |
-schell sort (ms)         |
-Quick sort (ms)          |
-Merge sort (ms)          | 
+tamaño muestra           |    100   |  1000
+insertion sort (ms)      |   73.76  |  64657.47
+schell sort (ms)         |   20.88  |  3151.34
+Quick sort (ms)          |   19.51  |  3235.12
+Merge sort (ms)          |   8.86   |  344.66
