@@ -1,3 +1,6 @@
+Integrantes:
+Nicolás Palacios - 202021759 - n.palacios2
+
 Máquina 1: Nicolás Palacios
 
 Procesador: Intel(R) Core(TM) i7-9750H CPU @ 2.60GHz   2.59 GHz
@@ -13,6 +16,26 @@ schell sort (ms)         |  10.42   |  31.25
 Quick sort (ms)          |  10.42   |  31.25
 Merge sort (ms)          |   5.2    |  36.46
 
+
+• ¿El comportamiento con relación al orden de crecimiento temporal de los algoritmos es acorde a lo enunciado teóricamente?
+La teroría dice que la mayor complejidad espacial en promedio la debería de tener insertion sort. Esto se ve en los resultados
+obtenidos, especialmente con la muestra más grande.Ya la diferencia entre los otros tres es un poco más dificil de ver. Sin embargo,
+la teoría dice que en promedio, el quick y el merge deben de tener orden de nlogn, mientras que schell debe de tener n^1.25 en el caso
+promedio. Que esto no se refleje evidentemente en los datos se puede deber a la poca cantidad de pruebas, y a que todavía la cantidad
+de datos organizados es relativamente pequeña para ver una diferencia significativa. 
+
+
+• ¿Existe alguna diferencia entre los resultados obtenidos al ejecutar las pruebas en diferentes máquinas?
+
+Sí existe una diferencia significativa entre los resultados de las dos máquinas. Esto seguramente se debe a la diferencia en procesador.
+El procesador de mi computador es más actual y con mayor capacidad que el de Alejandro, por lo tanto se van a poder hacer más comparaciones
+por segundo.
+
+• De existir diferencias, ¿a qué creen que se deben?
+Hay una diferencia de procesador, capacidad de la memoria RAM y en sistema operativo. Esto va a llevar a un diferencia en rendimiento al
+hacer las pruebas.
+
+
 single linked
 
 Porcentaje de la muestra |   small  |  10%
@@ -21,6 +44,22 @@ insertion sort (ms)      |   57.3   |  52875
 schell sort (ms)         |   15.625 |  2401
 Quick sort (ms)          |   10.42  |  2213.5
 Merge sort (ms)          |   5.2    |  322.9
+
+• ¿Cuál Estructura de Datos (ARRAY_LIST o SINGLE_LINKED) funciona generalmente mejor si solo se tiene en cuenta 
+los tiempos de ejecución de los algoritmos?
+
+Es bastante evidente que el Array es mucho más rápido que el single linked. Esto se ve en el tiempo de ejecución promedio con cada 
+tipo de algoritmo. 
+
+• Teniendo en cuenta las pruebas de tiempo de ejecución reportadas por los algoritmos de ordenamiento probados 
+(iterativos y recursivos), proponga un listado de estos ordenarlos de menor a mayor teniendo en cuenta el tiempo 
+de ejecución que toma ordenar las obras de arte.
+
+1. schell (mejor - menos tiempo)
+2. Merge
+3. Quick
+4. Insertion
+
 
 Máquina 2: Alejandro
 
@@ -31,11 +70,15 @@ Sistema Operativo: macOS Mojave version 10.14.6
 Array
 
 Porcentaje de la muestra |   small  |  10%
-tamaño muestra           |    100   |  10000
+tamaño muestra           |    100   |  1000
 insertion sort (ms)      |   13.3   |  910.63
 schell sort (ms)         |   3.67   |  47.2
 Quick sort (ms)          |   3.36   |  51.37
 Merge sort (ms)          |    4.5   |  47.11
+
+• ¿El comportamiento con relación al orden de crecimiento temporal de los algoritmos es acorde a lo enunciado teóricamente?
+• ¿Existe alguna diferencia entre los resultados obtenidos al ejecutar las pruebas en diferentes máquinas?
+• De existir diferencias, ¿a qué creen que se deben?
 
 single linked
 
@@ -45,3 +88,9 @@ insertion sort (ms)      |   73.76  |  64657.47
 schell sort (ms)         |   20.88  |  3151.34
 Quick sort (ms)          |   19.51  |  3235.12
 Merge sort (ms)          |   8.86   |  344.66
+
+• ¿Cuál Estructura de Datos (ARRAY_LIST o SINGLE_LINKED) funciona generalmente mejor si solo se tiene en cuenta los 
+tiempos de ejecución de los algoritmos?
+• Teniendo en cuenta las pruebas de tiempo de ejecución reportadas por los algoritmos de ordenamiento probados
+ (iterativos y recursivos), proponga un listado de estos ordenarlos de menor a mayor teniendo en cuenta el tiempo de 
+ ejecución que toma ordenar las obras de arte.
