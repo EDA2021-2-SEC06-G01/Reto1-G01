@@ -58,21 +58,21 @@ def printArtistasCronologicos(lista):
 
     for i in range(0,3):
         incluir = lt.newList("ARRAY_LIST")
-        lt.addLast(incluir,lista["elements"][i]["Nombre"])
-        lt.addLast(incluir,lista["elements"][i]["Nacimiento"])
-        lt.addLast(incluir,lista["elements"][i]["Muerte"])
-        lt.addLast(incluir,lista["elements"][i]["Nacionalidad"])
-        lt.addLast(incluir,lista["elements"][i]["Genero"])
+        lt.addLast(incluir,lt.getElement(lista,i)["Nombre"])
+        lt.addLast(incluir,lt.getElement(lista,i)["Nacimiento"])
+        lt.addLast(incluir,lt.getElement(lista,i)["Muerte"])
+        lt.addLast(incluir,lt.getElement(lista,i)["Nacionalidad"])
+        lt.addLast(incluir,lt.getElement(lista,i)["Genero"])
 
         print(incluir["elements"])
 
     for i in range(lt.size(lista)-3, lt.size(lista)):
         incluir = lt.newList("ARRAY_LIST")
-        lt.addLast(incluir,lista["elements"][i]["Nombre"])
-        lt.addLast(incluir,lista["elements"][i]["Nacimiento"])
-        lt.addLast(incluir,lista["elements"][i]["Muerte"])
-        lt.addLast(incluir,lista["elements"][i]["Nacionalidad"])
-        lt.addLast(incluir,lista["elements"][i]["Genero"])
+        lt.addLast(incluir,lt.getElement(lista,i)["Nombre"])
+        lt.addLast(incluir,lt.getElement(lista,i)["Nacimiento"])
+        lt.addLast(incluir,lt.getElement(lista,i)["Muerte"])
+        lt.addLast(incluir,lt.getElement(lista,i)["Nacionalidad"])
+        lt.addLast(incluir,lt.getElement(lista,i)["Genero"])
 
         print(incluir["elements"])
     

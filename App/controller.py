@@ -97,14 +97,13 @@ def sortbydate(list,sort_type):
 def artistas_cronologico(anio_i,anio_f,datos):
     datos = datos["Artist"].copy()
     shellsort.sort(datos,comparar_artistas_cronologico_creciente)
-    inicio = model.binary_search(datos["elements"],0,lt.size(datos),"Nacimiento",anio_i)
+    inicio = model.binary_search(datos,0,lt.size(datos),"Nacimiento",anio_i)
 
     i = inicio
     lista = lt.newList('ARRAY_LIST')
 
-    while datos["elements"][i]["Nacimiento"]<=anio_f and datos["elements"][i]["Nacimiento"] <= lt.lastElement(datos)["Nacimiento"]:
-        lt.addLast(lista,datos["elements"][i])
-
+    while lt.getElement(datos,i)["Nacimiento"]<=anio_f and lt.getElement(datos,i)["Nacimiento"] <= lt.lastElement(datos)["Nacimiento"]:
+        lt.addLast(lista,lt.getElement(datos,i))
         i += 1
 
     return lista
