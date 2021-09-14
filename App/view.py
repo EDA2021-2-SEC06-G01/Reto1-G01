@@ -139,7 +139,13 @@ while True:
     elif int(inputs[0]) == 2:
         print("Elija el tamaño de la muestra: ")
         size = int(input())
-        sublist = controller.create_sublist(catalog["Artwork"],size)
+
+        if lt.size(catalog["Artwork"]) >= size:
+            sublist = controller.create_sublist(catalog["Artwork"],size)
+        else:
+            print("El tamaño deseado es mayor al tamaño de la lista original")
+            break
+
 
         print("Elija como organizar la sublista: ")
         print("1-Insertion")

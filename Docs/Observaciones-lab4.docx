@@ -7,20 +7,20 @@ Sistema Operativo: Windows 10 Home Single Language
 Array
 
 Porcentaje de la muestra |   small  |  10%
-tamaño muestra           |
-insertion sort (ms)      |
-schell sort (ms)         |
-Quick sort (ms)          |
-Merge sort (ms)          | 
+tamaño muestra           |  100     |  1000
+insertion sort (ms)      |  10.42   |  546.875
+schell sort (ms)         |  10.42   |  31.25
+Quick sort (ms)          |  10.42   |  31.25
+Merge sort (ms)          |   5.2    |  36.46
 
 single linked
 
 Porcentaje de la muestra |   small  |  10%
-tamaño muestra           |
-insertion sort (ms)      |
-schell sort (ms)         |
-Quick sort (ms)          |
-Merge sort (ms)          | 
+tamaño muestra           |   100    |  1000
+insertion sort (ms)      |   57.3   |  52875
+schell sort (ms)         |   15.625 |  2401
+Quick sort (ms)          |   10.42  |  2213.5
+Merge sort (ms)          |   5.2    |  322.9
 
 Máquina 2: Alejandro
 
