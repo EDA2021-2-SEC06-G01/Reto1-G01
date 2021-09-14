@@ -101,6 +101,11 @@ def addArtwork(catalog,artwork):
 
     obra["Artistas"] = artistas
 
+    if artwork["CreditLine"] == "Purchase":
+        obra["Compra"] = True
+    else:
+        obra["Compra"]=False
+
    # for artista in artistas:
         #artista = int(artista)
         #posicion = None

@@ -45,7 +45,7 @@ def initCatalog(list_type):
 
 def loadData(catalog):
     loadArtist(catalog)
-    #mergesort.sort(catalog["Artist"],comparar_artistas_creciente)
+    shellsort.sort(catalog["Artist"],comparar_artistas_creciente)
     loadArtworks(catalog)
 
 
@@ -95,7 +95,7 @@ def sortbydate(list,sort_type):
 
 # Funciones de consulta sobre el catálogo
 def artistas_cronologico(anio_i,anio_f,datos):
-    datos = datos["Artist"].copy()
+    datos = datos.copy()
     shellsort.sort(datos,comparar_artistas_cronologico_creciente)
     inicio = model.binary_search(datos,0,lt.size(datos),"Nacimiento",anio_i)
 
@@ -107,6 +107,23 @@ def artistas_cronologico(anio_i,anio_f,datos):
         i += 1
 
     return lista
+
+def adquisiciones_cronologico(fecha_i,fecha_f,datos,artistas):
+    datos = datos.copy()
+    shellsort.sort(datos,model.comparedate)
+
+    inicio = model.binary_search(datos,0,lt.size(datos)["Fecha_ad",],fecha_i)
+
+    i = inicio
+    lista = lt.newList("ARRAY_LIST")
+    compras = 0
+
+    while lt.getElement(datos,i)["Fecha_ad"] <= fecha_f and lt.getElement(datos,i)["Fecha_ad"] <= lt.lastElement(datos)["Fecha_ad"]:
+        lt.addLast(lista,lt.getElement(datos,i))
+        if lt.getElement(lista,i)["Compra"] == True:
+            compras += 1
+
+    return lista,compras
 
 def create_sublist(list,size):
     if size < lt.size(list):
