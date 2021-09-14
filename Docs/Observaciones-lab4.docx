@@ -77,8 +77,20 @@ Quick sort (ms)          |   3.36   |  51.37
 Merge sort (ms)          |    4.5   |  47.11
 
 • ¿El comportamiento con relación al orden de crecimiento temporal de los algoritmos es acorde a lo enunciado teóricamente?
+Teoricamente se sabe que la el Insertion sort es aquel que tiene la mayor complejidad espacial y esto claramente 
+se puede observar en las pruebas realizadas, ademas de que entre mas grande es la muestra, mas se evidencia lo Teoricamente
+postulado. Tambien se pude observar que la diferencia entre los otros 3 tipos no es tan evidente o muy distinta, sin embargo, 
+esto podria provarse o justificarse mas con lo teorica si se aumenta el numero de tomas de datos para asi tener un
+menor porcebtaje de error.
+
 • ¿Existe alguna diferencia entre los resultados obtenidos al ejecutar las pruebas en diferentes máquinas?
+Claramente hay una diferencia significativa y esto puede deberse a que la maquina 1 tiene
+mejores caracteristicas de procesamiento y es mucho mas moderna que la maquina 2.
+
 • De existir diferencias, ¿a qué creen que se deben?
+Se deben principalmente a que ambas mauinas son completamente diferentes en lo absoluto, tanto en
+procesador, en moria RAM hasta en sistema operativo. Por lo que dichas diferencias tienen bastante peso 
+a la hora de realizar las pruebas.
 
 single linked
 
@@ -91,6 +103,22 @@ Merge sort (ms)          |   8.86   |  344.66
 
 • ¿Cuál Estructura de Datos (ARRAY_LIST o SINGLE_LINKED) funciona generalmente mejor si solo se tiene en cuenta los 
 tiempos de ejecución de los algoritmos?
+Se puede observar que la estructura ARRAY_LIST funciona mejor que la SINGLE_LINKED, debido a que 
+los tiempos de procesamiento en todas las pruebas fueron menores o de mejor rendimiento en la 
+primera que en la segunda.
+
 • Teniendo en cuenta las pruebas de tiempo de ejecución reportadas por los algoritmos de ordenamiento probados
  (iterativos y recursivos), proponga un listado de estos ordenarlos de menor a mayor teniendo en cuenta el tiempo de 
  ejecución que toma ordenar las obras de arte.
+Es curioso por que en los dos tipos de arreglos los algoritmos que mejor se comportan son diferentes
+asi que propondria lo siguiente
+- ARRAY_LIST:
+1. Schell
+2. Quick
+3. Merge
+4. Insertion
+- SINGLE_LINKED
+1. Merge
+2. Schell
+3. Quick
+4. Insertion
