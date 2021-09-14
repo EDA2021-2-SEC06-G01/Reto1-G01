@@ -51,14 +51,14 @@ def loadData(catalog):
 
 def loadArtist(catalog):
 
-    Artistfile = cf.data_dir + 'Artists-utf8-10pct.csv'
+    Artistfile = cf.data_dir + 'Artists-utf8-large.csv'
     input_file = csv.DictReader(open(Artistfile, encoding='utf-8'))
     for Artist in input_file:
         model.addArtist(catalog, Artist)
 
 
 def loadArtworks(catalog):
-    Artworks = cf.data_dir + 'Artworks-utf8-10pct.csv'
+    Artworks = cf.data_dir + 'Artworks-utf8-large.csv'
     input_file = csv.DictReader(open(Artworks, encoding='utf-8'))
     for Artwork in input_file:
         model.addArtwork(catalog, Artwork)
@@ -77,7 +77,7 @@ def comparar_artistas_cronologico_creciente(artista1,artista2):
     else:
         return False
 
-def sortbydate(list,sort_type):
+#def sortbydate(list,sort_type):
     start_time = time.process_time()
     if sort_type == 1:
         insertionsort.sort(list,model.comparedate)

@@ -59,7 +59,7 @@ def addArtist(catalog, artist):
     artista["Nacionalidad"] = artist["Nationality"]
     artista["Nacimiento"] = int(artist["BeginDate"])
     artista["Muerte"] = artist["EndDate"]
-    #artista["Obras"] = lt.newList("ARRAY_LIST",cmpfunction=compare)
+    artista["Obras"] = lt.newList("ARRAY_LIST",cmpfunction=compare)
     artista["Genero"] = artist["Gender"]
 
     lt.addLast(catalog["Artist"],artista)    
@@ -69,6 +69,7 @@ def addArtwork(catalog,artwork):
     obra["id"]=artwork["ObjectID"]
     obra["Titulo"] = artwork["Title"]
     obra["Medio"] = artwork["Medium"]
+    obra["Artistas"] = lt.newList("ARRAY_LIST")
     if artwork["DateAcquired"] != "":
         obra["Fecha_ad"] = datetime.strptime(artwork["DateAcquired"],"%Y-%m-%d")
     else:
@@ -99,19 +100,21 @@ def addArtwork(catalog,artwork):
     artistas = artistas.replace("]","")
     artistas = artistas.split(",")
 
-    obra["Artistas"] = artistas
+    obra["Artistas_cod"] = artistas
 
     if artwork["CreditLine"] == "Purchase":
         obra["Compra"] = True
     else:
         obra["Compra"]=False
 
-   # for artista in artistas:
-        #artista = int(artista)
-        #posicion = None
-        #posicion = binary_search(catalog["Artist"],0,lt.size(catalog["Artist"]),"Const.id",artista)
-        #diccionario = lt.getElement(catalog["Artist"],posicion)["Obras"]
-        #lt.addLast(diccionario,obra)
+    for codigo in artistas:
+       codigo = int(codigo)
+       posicion = None
+       posicion = binary_search(catalog["Artist"],0,lt.size(catalog["Artist"]),"Const.id",codigo)
+       artista = lt.getElement(catalog["Artist"],posicion)
+
+       lt.addLast(obra["Artistas"],artista)
+       lt.addLast(artista["Obras"],obra)
 
     lt.addLast(catalog["Artwork"],obra)
 
