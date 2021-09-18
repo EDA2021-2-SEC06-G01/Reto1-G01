@@ -142,14 +142,14 @@ def printNuevaProposicion(anio_i,anio_f,area_disponible):
 
 def printMenu():
     print("Bienvenido")
-    print("1- Cargar información en el catálogo")
-    print("2- Listar cronológicamente los artistas")
-    print("3- Listar cronológicamente las adquisiciones")
-    print("4-Clasificar las obras de un artista por técnica")
-    print("5-Clasificar las obras por la nacionalidad de sus creadores")
-    print("6-Transportar obras de un departamento")
-    print("7-Proponer una nueva exposición en el museo")
-    print("8-Salir")
+    print("0- Cargar información en el catálogo")
+    print("1- Listar cronológicamente los artistas")
+    print("2- Listar cronológicamente las adquisiciones")
+    print("3-Clasificar las obras de un artista por técnica")
+    print("4-Clasificar las obras por la nacionalidad de sus creadores")
+    print("5-Transportar obras de un departamento")
+    print("6-Proponer una nueva exposición en el museo")
+    print("7-Salir")
 
 catalog = None
 list_type = "ARRAY_LIST"
