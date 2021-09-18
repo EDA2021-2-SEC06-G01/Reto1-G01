@@ -1,6 +1,6 @@
 #ISIS1225 - Librerias de soporte
 
-Req 2. Nicolas Palacios, 202021759, n.palacios2@uniandes.edu.co
+Req 4. Nicolas Palacios, 202021759, n.palacios2@uniandes.edu.co
 
 Req 3. Alejandro Guerrero Pantoja, 201912747, a.guerrerop@uniandes.edu.co
 

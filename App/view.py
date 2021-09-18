@@ -106,8 +106,33 @@ def printAdquisicionesCronologicas(lista,compras):
 def printObrasArtistaTecnica(nombre):
     pass
 
-def printObrasNacionalidad(obras):
-    pass
+def printObrasNacionalidad(lista):
+    print("Las nacionalidades con más obras son: ")
+    for nacionalidad in lt.iterator(lista):
+        mensaje = nacionalidad["Pais"] + ": " + str(nacionalidad["Count"])
+        print(mensaje)
+    
+    print("--"*30)
+    print("Para la nacionaliad más común, las siguientes son las 3 primeras y últimas obras de la lista: ")
+
+    mayor_nacionalidad = lt.getElement(lista,1)
+    for i in range(1,4):
+        obra = lt.getElement(mayor_nacionalidad["Lista"],i)
+        artistas_list = ""
+        for artista in lt.iterator(obra["Artistas"]):
+            artistas_list += artista["Nombre"]
+        mensaje = [obra["Titulo"],artistas_list,obra["Fecha"],obra["Medio"],obra["Dimensiones"]]
+        print(mensaje)
+
+    for i in range(lt.size(lista)-3,lt.size(lista)):
+        obra = lt.getElement(mayor_nacionalidad["Lista"],i)
+        artistas_list = ""
+        for artista in lt.iterator(obra["Artistas"]):
+            artistas_list += artista["Nombre"]
+        mensaje = [obra["Titulo"],artistas_list,obra["Fecha"],obra["Medio"],obra["Dimensiones"]]
+        print(mensaje)
+
+    
 
 def printTrasportarObras(departamento):
     pass
@@ -157,6 +182,7 @@ while True:
         fecha_f = input("Ingrese la fecha final (YYYY-MM-DD): ")
         fecha_f = fecha_f.strip()
         fecha_f = datetime.strptime(fecha_f,"%Y-%m-%d")
+        print("Cargando información de los archivos...")
 
         resultado = controller.adquisiciones_cronologico(fecha_i,fecha_f,catalog["Artwork"])
         printAdquisicionesCronologicas(resultado[0],resultado[1])
@@ -167,9 +193,9 @@ while True:
         printObrasArtistaTecnica(nombre_artista)
 
     elif int(inputs[0]) == 5:
-        obras = input("Ingrese la nacionalidad: ")
-        lista = controller.obras_nacionalidad(obras)
-        printObrasNacionalidad(obras)
+        print("Cargando información de los archivos...")
+        resultado = controller.obras_nacionalidad(catalog["Artwork"])
+        printObrasNacionalidad(resultado)
 
     elif int(inputs[0]) == 6:
         departamento = input("Ingrese el Departamento del museo del cual se transportan las obras: ")

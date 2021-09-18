@@ -126,6 +126,39 @@ def adquisiciones_cronologico(fecha_i,fecha_f,datos,):
 
     return lista,compras
 
+def obras_nacionalidad(datos):
+    histograma = {}
+    for obra in lt.iterator(datos):
+        for artista in lt.iterator(obra["Artistas"]):
+            nacionalidad = artista["Nacionalidad"]
+            if nacionalidad in histograma:
+                histograma[nacionalidad]["Count"] += 1
+                lt.addLast(histograma[nacionalidad]["Lista"],obra)
+            elif nacionalidad != "":
+                histograma[nacionalidad] = {}
+                histograma[nacionalidad]["Pais"] = nacionalidad
+                histograma[nacionalidad]["Count"] = 1
+                histograma[nacionalidad]["Lista"] = lt.newList("ARRAY_LIST")
+                lt.addLast(histograma[nacionalidad]["Lista"],obra)
+            else:
+                continue
+    
+    orden = lt.newList("ARRAY_LIST")
+    for i in range(0,10):
+        numero_mayor = 0
+        pais_mayor = ""
+        for pais in histograma:
+            if histograma[pais]["Count"]>numero_mayor:
+                numero_mayor = histograma[pais]["Count"]
+                pais_mayor = histograma[pais]["Pais"]
+            else:
+                continue
+        
+        lt.addLast(orden,histograma[pais_mayor].copy())
+        histograma[pais_mayor]["Count"] = -1
+    return orden
+
+
 def create_sublist(list,size):
     if size < lt.size(list):
         lista = lt.subList(list,0,size)
