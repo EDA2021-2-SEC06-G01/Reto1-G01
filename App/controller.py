@@ -108,11 +108,11 @@ def artistas_cronologico(anio_i,anio_f,datos):
 
     return lista
 
-def adquisiciones_cronologico(fecha_i,fecha_f,datos,artistas):
+def adquisiciones_cronologico(fecha_i,fecha_f,datos,):
     datos = datos.copy()
     shellsort.sort(datos,model.comparedate)
 
-    inicio = model.binary_search(datos,0,lt.size(datos)["Fecha_ad",],fecha_i)
+    inicio = model.binary_search(datos,0,lt.size(datos),"Fecha_ad",fecha_i)
 
     i = inicio
     lista = lt.newList("ARRAY_LIST")
@@ -120,8 +120,9 @@ def adquisiciones_cronologico(fecha_i,fecha_f,datos,artistas):
 
     while lt.getElement(datos,i)["Fecha_ad"] <= fecha_f and lt.getElement(datos,i)["Fecha_ad"] <= lt.lastElement(datos)["Fecha_ad"]:
         lt.addLast(lista,lt.getElement(datos,i))
-        if lt.getElement(lista,i)["Compra"] == True:
+        if lt.getElement(datos,i)["Compra"] == True:
             compras += 1
+        i += 1
 
     return lista,compras
 

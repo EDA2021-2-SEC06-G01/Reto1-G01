@@ -57,7 +57,7 @@ def printArtistasCronologicos(lista):
     mensaje1 = "El número de aritistas en este rango es: " + str(lt.size(lista))
     print(mensaje1)
 
-    for i in range(0,3):
+    for i in range(1,4):
         incluir = []
         artista = lt.getElement(lista,i)
         incluir = [artista["Nombre"],artista["Nacimiento"],artista["Muerte"],artista["Nacionalidad"],artista["Genero"]]
@@ -78,24 +78,30 @@ def printAdquisicionesCronologicas(lista,compras):
     print(mensaje)
     print(mensaje2)
 
-    for i in range(0,3):
+    for i in range(1,4):
         incluir = []
         artwork = lt.getElement(lista,i)
-        incluir = [artwork["Titulo"],artwork["Artistas"],artwork["Fecha"],artwork["Medio"],artwork["dimensiones"]]
+        artistas_list = ""
+        for artista in lt.iterator(artwork["Artistas"]):
+            artistas_list += artista["Nombre"]
+
+
+        incluir = [artwork["Titulo"],artistas_list,artwork["Fecha"],artwork["Medio"],artwork["Dimensiones"],"Fecha adquirida "+ str(artwork["Fecha_ad"])]
 
         print(incluir)
-
-        print(lt.iterator(incluir))
+ 
 
     for i in range(lt.size(lista)-3, lt.size(lista)):
-        incluir = lt.newList("ARRAY_LIST")
-        lt.addLast(incluir,lt.getElement(lista,i)["Nombre"])
-        lt.addLast(incluir,lt.getElement(lista,i)["Nacimiento"])
-        lt.addLast(incluir,lt.getElement(lista,i)["Muerte"])
-        lt.addLast(incluir,lt.getElement(lista,i)["Nacionalidad"])
-        lt.addLast(incluir,lt.getElement(lista,i)["Genero"])
+        incluir = []
+        artwork = lt.getElement(lista,i)
+        artistas_list = ""
+        for artista in lt.iterator(artwork["Artistas"]):
+            artistas_list += artista["Nombre"]
 
-        print(lt.iterator(incluir))
+
+        incluir = [artwork["Titulo"],artistas_list,artwork["Fecha"],artwork["Medio"],artwork["Dimensiones"],"Fecha adquirida "+ str(artwork["Fecha_ad"])]
+
+        print(incluir)
 
 def printObrasArtistaTecnica(nombre):
     pass
@@ -140,18 +146,19 @@ while True:
     elif int(inputs[0]) == 2:
         anio_i = int(input("Ingrese el año de inicio: "))
         anio_f = int(input("Ingrese el año final: "))
+        print("Cargando información de los archivos...")
         lista = controller.artistas_cronologico(anio_i,anio_f,catalog["Artist"])
         printArtistasCronologicos(lista)
 
     elif int(inputs[0]) == 3:
-        fecha_i = input("Ingrese la fecha inicia (YYYY-MM-DD): ")
+        fecha_i = input("Ingrese la fecha inicial (YYYY-MM-DD): ")
         fecha_i = fecha_i.strip()
         fecha_i = datetime.strptime(fecha_i,"%Y-%m-%d")
         fecha_f = input("Ingrese la fecha final (YYYY-MM-DD): ")
         fecha_f = fecha_f.strip()
         fecha_f = datetime.strptime(fecha_f,"%Y-%m-%d")
 
-        resultado = controller.adquisiciones_cronologico(fecha_i,fecha_f,catalog["Artwork"],catalog["Artist"])
+        resultado = controller.adquisiciones_cronologico(fecha_i,fecha_f,catalog["Artwork"])
         printAdquisicionesCronologicas(resultado[0],resultado[1])
 
     elif int(inputs[0]) == 4:

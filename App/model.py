@@ -69,6 +69,8 @@ def addArtwork(catalog,artwork):
     obra["id"]=artwork["ObjectID"]
     obra["Titulo"] = artwork["Title"]
     obra["Medio"] = artwork["Medium"]
+    obra["Dimensiones"] = artwork["Dimensions"]
+    obra["Fecha"] = artwork["Date"]
     obra["Artistas"] = lt.newList("ARRAY_LIST")
     if artwork["DateAcquired"] != "":
         obra["Fecha_ad"] = datetime.strptime(artwork["DateAcquired"],"%Y-%m-%d")
@@ -117,8 +119,6 @@ def addArtwork(catalog,artwork):
        lt.addLast(artista["Obras"],obra)
 
     lt.addLast(catalog["Artwork"],obra)
-
-
 
 
 # Funciones para creacion de datos
