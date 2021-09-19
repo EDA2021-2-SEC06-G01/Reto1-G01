@@ -160,7 +160,7 @@ Menu principal
 while True:
     printMenu()
     inputs = input('Seleccione una opción para continuar\n')
-    if int(inputs[0]) == 1:
+    if int(inputs[0]) == 0:
         print("Cargando información de los archivos ....")
         catalog = initCatalog(list_type)
         loadData(catalog)
@@ -168,14 +168,14 @@ while True:
         print("Aritistas cargados: "+ str(lt.size(catalog["Artist"])))
         print("Obras cargadas: "+ str(lt.size(catalog["Artwork"])))
 
-    elif int(inputs[0]) == 2:
+    elif int(inputs[0]) == 1:
         anio_i = int(input("Ingrese el año de inicio: "))
         anio_f = int(input("Ingrese el año final: "))
         print("Cargando información de los archivos...")
         lista = controller.artistas_cronologico(anio_i,anio_f,catalog["Artist"])
         printArtistasCronologicos(lista)
 
-    elif int(inputs[0]) == 3:
+    elif int(inputs[0]) == 2:
         fecha_i = input("Ingrese la fecha inicial (YYYY-MM-DD): ")
         fecha_i = fecha_i.strip()
         fecha_i = datetime.strptime(fecha_i,"%Y-%m-%d")
@@ -187,22 +187,22 @@ while True:
         resultado = controller.adquisiciones_cronologico(fecha_i,fecha_f,catalog["Artwork"])
         printAdquisicionesCronologicas(resultado[0],resultado[1])
 
-    elif int(inputs[0]) == 4:
+    elif int(inputs[0]) == 3:
         nombre_artista = input("Ingrese el nombre del artista: ")
         lista = controller.artistas_tecnica(nombre_artista)
         printObrasArtistaTecnica(nombre_artista)
 
-    elif int(inputs[0]) == 5:
+    elif int(inputs[0]) == 4:
         print("Cargando información de los archivos...")
         resultado = controller.obras_nacionalidad(catalog["Artwork"])
         printObrasNacionalidad(resultado)
 
-    elif int(inputs[0]) == 6:
+    elif int(inputs[0]) == 5:
         departamento = input("Ingrese el Departamento del museo del cual se transportan las obras: ")
         lista = controller.transporte_obras(departamento)
         printTrasportarObras(departamento)
 
-    elif int(inputs[0]) == 7:
+    elif int(inputs[0]) == 6:
         anio_i = input("Ingrese el año inicial de las obras: ")
         anio_f = input("Ingrese el año final de las obras: ")
         area_disponible = input("Ingrese cuanta area (m^2) esta disponible para los objetos planos (cudros y fotos): ")
@@ -211,7 +211,7 @@ while True:
         area = controller.proposicion_exposicion(catalog, area_disponible)
         printNuevaProposicion(anio_i,anio_f,area_disponible)
     
-    elif int(inputs[0])==8:
+    elif int(inputs[0])==7:
         break
 
     else:
