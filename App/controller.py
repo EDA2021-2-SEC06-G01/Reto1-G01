@@ -164,25 +164,50 @@ def transporte_obras(departamento,datos):
     inicio = model.binary_search(datos,0,lt.size(datos),"Departamento",departamento)
     i = inicio
     lista = lt.newList("ARRAY_LIST")
+    precio_acumulado = 0
+    peso_acumulado = 0
+    mas_costosas = lt.newList("ARRAY_LIST")
+
+    for k in range(0,5):
+        obra_dummy = {"Obra":None,"Precio":0}
+        lt.addLast(mas_costosas,obra_dummy)
+
 
     while lt.getElement(datos,i)["Departamento"] == departamento:
         elemento = lt.getElement(datos,i)
         obra = {}
         obra["Obra"] = elemento
-        precio = None
-        if elemento["Profundidad"] == 0 and elemento["Altura"] == 0 and elemento["Ancho"] == 0 and elemento["Peso"] == 0:
-            precio = 48
-        else:
-            P_area = elemento["Altura"]*elemento["Ancho"]*72
-            P_vol = elemento["Altura"]*elemento["Ancho"]*elemento["Profundidad"]*72
-            P_peso = elemento["Peso"]*72
-            precio = max(P_area,P_vol,P_peso)
-        
-        obra["Precio"] = precio
-        i += 1
 
+        P_area = elemento["Altura"]*elemento["Ancho"]*72
+        P_vol = elemento["Altura"]*elemento["Ancho"]*elemento["Profundidad"]*72
+        P_peso = elemento["Peso"]*72
+        precio = max(P_area,P_vol,P_peso)
+
+        if precio == 0:
+            precio = 48
+        
+        obra["Precio"] = round(precio,2)
         lt.addLast(lista,obra)
-    return lista
+        precio_acumulado += precio
+        peso_acumulado += elemento["Peso"]
+
+        pos_min = None
+        precio_min = 1000*100000
+        for j in range(1,lt.size(mas_costosas)+1):
+            valor = lt.getElement(mas_costosas,j)["Precio"]
+            if valor < precio_min:
+                precio_min = valor
+                pos_min = j
+        
+        if precio > precio_min:
+            lt.changeInfo(mas_costosas,pos_min,obra)
+
+        i += 1
+    
+    insertionsort.sort(mas_costosas,model.compare_price)
+
+
+    return lista,precio_acumulado,peso_acumulado,mas_costosas
 
 #def create_sublist(list,size):
     #if size < lt.size(list):

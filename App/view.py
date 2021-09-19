@@ -134,8 +134,45 @@ def printObrasNacionalidad(lista):
 
     
 
-def printTrasportarObras(departamento):
-    pass
+def printTrasportarObras(resultado):
+    lista = resultado[0]
+    precio_acumulado = round(resultado[1],2)
+    peso_acumulado = round(resultado[2],2)
+    mas_costosas = resultado[3]
+    
+    print("La cantidad de obras a transportar es: " + str(lt.size(lista)))
+    print("El estimado del costo del transporte es: " + str(precio_acumulado) + " USD")
+    print("El peso de la carga es de: " + str(peso_acumulado) + " kg")
+    print("Las obras más antiguas a transportar son: ")
+    
+    contador = 0
+    i = 1
+
+    while True:
+        elemento = lt.getElement(lista,i)["Obra"]
+        if elemento["Fecha"] != "":
+            artistas_list = ""
+            for artista in lt.iterator(elemento["Artistas"]):
+                artistas_list += artista["Nombre"] + " "
+            mensaje = [elemento["Titulo"],artistas_list,elemento["Clasificacion"],elemento["Fecha"],elemento["Medio"],elemento["Dimensiones"],"Precio de transporte: "+str(lt.getElement(lista,i)["Precio"])+ " USD"]
+            print(mensaje)
+            contador += 1
+
+        i += 1
+        if contador == 5:
+            break
+    
+    print("Las obras mas costosas de transportar son: ")
+    
+    for obra in lt.iterator(mas_costosas):
+        elemento = obra["Obra"]
+        artistas_list = ""
+        for artista in lt.iterator(elemento["Artistas"]):
+            artistas_list += artista["Nombre"] + " "
+        
+        mensaje = [elemento["Titulo"],artistas_list,elemento["Clasificacion"],elemento["Fecha"],elemento["Medio"],elemento["Dimensiones"],"Precio de transporte: "+str(obra["Precio"])+ " USD"]
+        print(mensaje)
+
 
 def printNuevaProposicion(anio_i,anio_f,area_disponible):
     pass
@@ -201,8 +238,8 @@ while True:
         inputs = input("Ingrese el Departamento del museo del cual se transportan las obras: ")
         departamento = inputs.strip()
         print("Cargando información de los archivos...")
-        lista = controller.transporte_obras(departamento,catalog["Artwork"])
-        printTrasportarObras(lista)
+        resultado = controller.transporte_obras(departamento,catalog["Artwork"])
+        printTrasportarObras(resultado)
 
     elif int(inputs[0]) == 6:
         anio_i = input("Ingrese el año inicial de las obras: ")

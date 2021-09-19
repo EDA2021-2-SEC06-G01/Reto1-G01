@@ -73,6 +73,7 @@ def addArtwork(catalog,artwork):
     obra["Fecha"] = artwork["Date"]
     obra["Artistas"] = lt.newList("ARRAY_LIST")
     obra["Departamento"]=artwork["Department"]
+    obra["Clasificacion"] = artwork["Classification"]
 
     if artwork["DateAcquired"] != "":
         obra["Fecha_ad"] = datetime.strptime(artwork["DateAcquired"],"%Y-%m-%d")
@@ -198,6 +199,11 @@ def compare_department(artwork1,artwork2):
             return True
         else:
             return False
+    else:
+        return False
+def compare_price(artwork1,artwork2):
+    if artwork1["Precio"] > artwork2["Precio"]:
+        return True
     else:
         return False
 
