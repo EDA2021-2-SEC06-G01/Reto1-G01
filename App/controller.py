@@ -158,13 +158,39 @@ def obras_nacionalidad(datos):
         histograma[pais_mayor]["Count"] = -1
     return orden
 
+def transporte_obras(departamento,datos):
+    datos = datos.copy()
+    shellsort.sort(datos,model.compare_department)
+    inicio = model.binary_search(datos,0,lt.size(datos),"Departamento",departamento)
+    i = inicio
+    lista = lt.newList("ARRAY_LIST")
 
-def create_sublist(list,size):
-    if size < lt.size(list):
-        lista = lt.subList(list,0,size)
-        return lista
+    while lt.getElement(datos,i)["Departamento"] == departamento:
+        elemento = lt.getElement(datos,i)
+        obra = {}
+        obra["Obra"] = elemento
+        precio = None
+        if elemento["Profundidad"] == 0 and elemento["Altura"] == 0 and elemento["Ancho"] == 0 and elemento["Peso"] == 0:
+            precio = 48
+        else:
+            P_area = elemento["Altura"]*elemento["Ancho"]*72
+            P_vol = elemento["Altura"]*elemento["Ancho"]*elemento["Profundidad"]*72
+            P_peso = elemento["Peso"]*72
+            precio = max(P_area,P_vol,P_peso)
+        
+        obra["Precio"] = precio
+        i += 1
+
+        lt.addLast(lista,obra)
+    return lista
+
+#def create_sublist(list,size):
+    #if size < lt.size(list):
+        
+        #lista = lt.subList(list,0,size)
+        #return lista
     
-    else:
-        return -1
+    #else:
+        #return -1
 
 

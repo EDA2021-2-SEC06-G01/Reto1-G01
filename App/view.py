@@ -198,9 +198,11 @@ while True:
         printObrasNacionalidad(resultado)
 
     elif int(inputs[0]) == 5:
-        departamento = input("Ingrese el Departamento del museo del cual se transportan las obras: ")
-        lista = controller.transporte_obras(departamento)
-        printTrasportarObras(departamento)
+        inputs = input("Ingrese el Departamento del museo del cual se transportan las obras: ")
+        departamento = inputs.strip()
+        print("Cargando información de los archivos...")
+        lista = controller.transporte_obras(departamento,catalog["Artwork"])
+        printTrasportarObras(lista)
 
     elif int(inputs[0]) == 6:
         anio_i = input("Ingrese el año inicial de las obras: ")

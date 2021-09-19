@@ -72,6 +72,8 @@ def addArtwork(catalog,artwork):
     obra["Dimensiones"] = artwork["Dimensions"]
     obra["Fecha"] = artwork["Date"]
     obra["Artistas"] = lt.newList("ARRAY_LIST")
+    obra["Departamento"]=artwork["Department"]
+
     if artwork["DateAcquired"] != "":
         obra["Fecha_ad"] = datetime.strptime(artwork["DateAcquired"],"%Y-%m-%d")
     else:
@@ -80,22 +82,22 @@ def addArtwork(catalog,artwork):
     if artwork["Depth (cm)"] == "":
         obra["Profundidad"] = 0
     else:
-        obra["Profundidad"] = artwork["Depth (cm)"]
+        obra["Profundidad"] = float(artwork["Depth (cm)"])/100
 
     if artwork["Height (cm)"] == "":
         obra["Altura"] = 0
     else:
-        obra["Altura"] = artwork["Height (cm)"]
+        obra["Altura"] = float(artwork["Height (cm)"])/100
 
     if artwork["Weight (kg)"] == "":
         obra["Peso"] = 0
     else:
-        obra["Peso"] = artwork["Weight (kg)"]
+        obra["Peso"] = float(artwork["Weight (kg)"])
 
     if artwork["Width (cm)"] == "":
         obra["Ancho"] = 0
     else:
-        obra["Ancho"] = artwork["Width (cm)"]
+        obra["Ancho"] = float(artwork["Width (cm)"])/100
     
     artistas = artwork["ConstituentID"]
     artistas = artistas.replace("[","")
@@ -111,7 +113,6 @@ def addArtwork(catalog,artwork):
 
     for codigo in artistas:
        codigo = int(codigo)
-       posicion = None
        posicion = binary_search(catalog["Artist"],0,lt.size(catalog["Artist"]),"Const.id",codigo)
        artista = lt.getElement(catalog["Artist"],posicion)
 
@@ -154,6 +155,7 @@ def binary_search(arr, low, high,key, x):
         mid = (high + low) // 2
  
         # If element is present at the middle itself
+        prueba = lt.getElement(arr,mid)[key]
         if lt.getElement(arr,mid)[key] == x:
             #Revisar si hay duplicados
             while lt.getElement(arr,mid)[key] == lt.getElement(arr,mid-1)[key]:
@@ -185,6 +187,17 @@ def compare(artist1,artist):
 def comparedate(artwork1,artwork2):
     if artwork1["Fecha_ad"] < artwork2["Fecha_ad"]:
         return True
+    else:
+        return False
+
+def compare_department(artwork1,artwork2):
+    if artwork1["Departamento"] < artwork2["Departamento"]:
+        return True
+    elif artwork1["Departamento"] == artwork2["Departamento"]:
+        if artwork1["Fecha"]<artwork2["Fecha"]:
+            return True
+        else:
+            return False
     else:
         return False
 
