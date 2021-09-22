@@ -27,6 +27,7 @@ import controller
 from DISClib.ADT import list as lt
 assert cf
 from datetime import datetime
+import time
 
 import sys
 default_limit = 1000
@@ -53,7 +54,7 @@ def loadData(catalog):
     controller.loadData(catalog)
 
 
-def printArtistasCronologicos(lista):
+def printArtistasCronologicos(lista,tiempo):
     mensaje1 = "El número de aritistas en este rango es: " + str(lt.size(lista))
     print(mensaje1)
 
@@ -70,8 +71,9 @@ def printArtistasCronologicos(lista):
         incluir = [artista["Nombre"],artista["Nacimiento"],artista["Muerte"],artista["Nacionalidad"],artista["Genero"]]
 
         print(incluir)
+    print("El tiempo tomado fue: " + str(tiempo) + " mseg")
 
-def printAdquisicionesCronologicas(lista,compras):
+def printAdquisicionesCronologicas(lista,compras,tiempo):
 
     mensaje = "El número de obras adquiridas en este rango es: " + str(lt.size(lista))
     mensaje2 = "De las cuales " + str(compras) + " fueron compradas"
@@ -89,6 +91,7 @@ def printAdquisicionesCronologicas(lista,compras):
         incluir = [artwork["Titulo"],artistas_list,artwork["Fecha"],artwork["Medio"],artwork["Dimensiones"],"Fecha adquirida "+ str(artwork["Fecha_ad"])]
 
         print(incluir)
+        print("El tiempo tomado fue: " + str(tiempo) + " mseg")
  
 
     for i in range(lt.size(lista)-3, lt.size(lista)):
@@ -102,11 +105,12 @@ def printAdquisicionesCronologicas(lista,compras):
         incluir = [artwork["Titulo"],artistas_list,artwork["Fecha"],artwork["Medio"],artwork["Dimensiones"],"Fecha adquirida "+ str(artwork["Fecha_ad"])]
 
         print(incluir)
+    print("El tiempo tomado fue: " + str(tiempo) + " mseg")
 
 def printObrasArtistaTecnica(nombre):
     pass
 
-def printObrasNacionalidad(lista):
+def printObrasNacionalidad(lista,tiempo):
     print("Las nacionalidades con más obras son: ")
     for nacionalidad in lt.iterator(lista):
         mensaje = nacionalidad["Pais"] + ": " + str(nacionalidad["Count"])
@@ -131,10 +135,12 @@ def printObrasNacionalidad(lista):
             artistas_list += artista["Nombre"]
         mensaje = [obra["Titulo"],artistas_list,obra["Fecha"],obra["Medio"],obra["Dimensiones"]]
         print(mensaje)
+    
+    print("El tiempo tomado fue: " + str(tiempo) + " mseg")
 
     
 
-def printTrasportarObras(resultado):
+def printTrasportarObras(resultado,tiempo):
     lista = resultado[0]
     precio_acumulado = round(resultado[1],2)
     peso_acumulado = round(resultado[2],2)
@@ -172,6 +178,8 @@ def printTrasportarObras(resultado):
         
         mensaje = [elemento["Titulo"],artistas_list,elemento["Clasificacion"],elemento["Fecha"],elemento["Medio"],elemento["Dimensiones"],"Precio de transporte: "+str(obra["Precio"])+ " USD"]
         print(mensaje)
+    
+    print("El tiempo tomado fue: " + str(tiempo) + " mseg")
 
 
 def printNuevaProposicion(anio_i,anio_f,area_disponible):
@@ -209,8 +217,11 @@ while True:
         anio_i = int(input("Ingrese el año de inicio: "))
         anio_f = int(input("Ingrese el año final: "))
         print("Cargando información de los archivos...")
+        start_time = time.process_time()
         lista = controller.artistas_cronologico(anio_i,anio_f,catalog["Artist"])
-        printArtistasCronologicos(lista)
+        stop_time = time.process_time()
+        elapsed_time_mseg = (stop_time - start_time)*1000
+        printArtistasCronologicos(lista,elapsed_time_mseg)
 
     elif int(inputs[0]) == 2:
         fecha_i = input("Ingrese la fecha inicial (YYYY-MM-DD): ")
@@ -220,26 +231,34 @@ while True:
         fecha_f = fecha_f.strip()
         fecha_f = datetime.strptime(fecha_f,"%Y-%m-%d")
         print("Cargando información de los archivos...")
-
+        start_time = time.process_time()
         resultado = controller.adquisiciones_cronologico(fecha_i,fecha_f,catalog["Artwork"])
-        printAdquisicionesCronologicas(resultado[0],resultado[1])
+        stop_time = time.process_time()
+        elapsed_time_mseg = (stop_time - start_time)*1000
+        printAdquisicionesCronologicas(resultado[0],resultado[1],elapsed_time_mseg)
 
     elif int(inputs[0]) == 3:
         nombre_artista = input("Ingrese el nombre del artista: ")
         lista = controller.artistas_tecnica(nombre_artista)
-        printObrasArtistaTecnica(nombre_artista)
+        printObrasArtistaTecnica(nombre_artista,)
 
     elif int(inputs[0]) == 4:
         print("Cargando información de los archivos...")
+        start_time = time.process_time()
         resultado = controller.obras_nacionalidad(catalog["Artwork"])
-        printObrasNacionalidad(resultado)
+        stop_time = time.process_time()
+        elapsed_time_mseg = (stop_time - start_time)*1000
+        printObrasNacionalidad(resultado,elapsed_time_mseg)
 
     elif int(inputs[0]) == 5:
         inputs = input("Ingrese el Departamento del museo del cual se transportan las obras: ")
         departamento = inputs.strip()
         print("Cargando información de los archivos...")
+        start_time = time.process_time()
         resultado = controller.transporte_obras(departamento,catalog["Artwork"])
-        printTrasportarObras(resultado)
+        stop_time = time.process_time()
+        elapsed_time_mseg = (stop_time - start_time)*1000
+        printTrasportarObras(resultado,elapsed_time_mseg)
 
     elif int(inputs[0]) == 6:
         anio_i = input("Ingrese el año inicial de las obras: ")
