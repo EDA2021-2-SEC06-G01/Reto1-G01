@@ -192,8 +192,8 @@ def transporte_obras(departamento,datos):
         P_vol = elemento["Altura"]*elemento["Ancho"]*elemento["Profundidad"]*72
         P_peso = elemento["Peso"]*72
         P_cilindro = elemento["Diametro"]**2*elemento["Altura"]*math.pi/4*72
-        P_cilindro2 = elemento["Diametro"]*elemento["Diametro"]*elemento["Profundidad"]*math.pi/4*72
-        P_cilindro3 = (elemento["Circunferencia"]/math.pi)**2*elemento["Altura"]/4
+        P_cilindro2 = elemento["Diametro"]**2*elemento["Profundidad"]*math.pi/4*72
+        P_cilindro3 = (elemento["Circunferencia"]/math.pi)**2*elemento["Altura"]*math.pi/4*72
         precio = max(P_area,P_vol,P_peso,P_cilindro,P_cilindro2,P_area2,P_cilindro3)
 
         if precio == 0:
