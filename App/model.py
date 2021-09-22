@@ -95,6 +95,16 @@ def addArtwork(catalog,artwork):
     else:
         obra["Peso"] = float(artwork["Weight (kg)"])
 
+    if artwork["Circumference (cm)"] == "":
+        obra["Circunferencia"] = 0
+    else:
+        obra["Circunferencia"] = float(artwork["Circumference (cm)"])/100
+
+    if artwork["Diameter (cm)"] == "":
+        obra["Diametro"] = 0
+    else:
+        obra["Diametro"] = float(artwork["Diameter (cm)"])/100
+
     if artwork["Width (cm)"] == "":
         obra["Ancho"] = 0
     else:

@@ -31,6 +31,7 @@ from DISClib.ADT import list as lt
 import time
 from datetime import datetime
 from datetime import timedelta
+import math
 
 
 """
@@ -53,14 +54,14 @@ def loadData(catalog):
 
 def loadArtist(catalog):
 
-    Artistfile = cf.data_dir + 'Artists-utf8-small.csv'
+    Artistfile = cf.data_dir + 'Artists-utf8-large.csv'
     input_file = csv.DictReader(open(Artistfile, encoding='utf-8'))
     for Artist in input_file:
         model.addArtist(catalog, Artist)
 
 
 def loadArtworks(catalog):
-    Artworks = cf.data_dir + 'Artworks-utf8-small.csv'
+    Artworks = cf.data_dir + 'Artworks-utf8-large.csv'
     input_file = csv.DictReader(open(Artworks, encoding='utf-8'))
     for Artwork in input_file:
         model.addArtwork(catalog, Artwork)
@@ -187,9 +188,13 @@ def transporte_obras(departamento,datos):
         obra["Obra"] = elemento
 
         P_area = elemento["Altura"]*elemento["Ancho"]*72
+        P_area2=elemento["Ancho"]*elemento["Profundidad"]*72
         P_vol = elemento["Altura"]*elemento["Ancho"]*elemento["Profundidad"]*72
         P_peso = elemento["Peso"]*72
-        precio = max(P_area,P_vol,P_peso)
+        P_cilindro = elemento["Diametro"]**2*elemento["Altura"]*math.pi/4*72
+        P_cilindro2 = elemento["Diametro"]*elemento["Diametro"]*elemento["Profundidad"]*math.pi/4*72
+        P_cilindro3 = (elemento["Circunferencia"]/math.pi)**2*elemento["Altura"]/4
+        precio = max(P_area,P_vol,P_peso,P_cilindro,P_cilindro2,P_area2,P_cilindro3)
 
         if precio == 0:
             precio = 48
