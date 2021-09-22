@@ -29,6 +29,8 @@ from DISClib.Algorithms.Sorting import mergesort
 from DISClib.Algorithms.Sorting import quicksort
 from DISClib.ADT import list as lt
 import time
+from datetime import datetime
+from datetime import timedelta
 
 
 """
@@ -51,14 +53,14 @@ def loadData(catalog):
 
 def loadArtist(catalog):
 
-    Artistfile = cf.data_dir + 'Artists-utf8-large.csv'
+    Artistfile = cf.data_dir + 'Artists-utf8-small.csv'
     input_file = csv.DictReader(open(Artistfile, encoding='utf-8'))
     for Artist in input_file:
         model.addArtist(catalog, Artist)
 
 
 def loadArtworks(catalog):
-    Artworks = cf.data_dir + 'Artworks-utf8-large.csv'
+    Artworks = cf.data_dir + 'Artworks-utf8-small.csv'
     input_file = csv.DictReader(open(Artworks, encoding='utf-8'))
     for Artwork in input_file:
         model.addArtwork(catalog, Artwork)
@@ -98,6 +100,9 @@ def artistas_cronologico(anio_i,anio_f,datos):
     datos = datos.copy()
     shellsort.sort(datos,comparar_artistas_cronologico_creciente)
     inicio = model.binary_search(datos,0,lt.size(datos),"Nacimiento",anio_i)
+    while inicio == -1:
+        anio_i = anio_i+1
+        inicio = model.binary_search(datos,0,lt.size(datos),"Nacimiento",anio_i)
 
     i = inicio
     lista = lt.newList('ARRAY_LIST')
@@ -113,6 +118,9 @@ def adquisiciones_cronologico(fecha_i,fecha_f,datos,):
     shellsort.sort(datos,model.comparedate)
 
     inicio = model.binary_search(datos,0,lt.size(datos),"Fecha_ad",fecha_i)
+    while inicio == -1:
+        fecha_i += timedelta(days=1)
+        inicio = model.binary_search(datos,0,lt.size(datos),"Fecha_ad",fecha_i)
 
     i = inicio
     lista = lt.newList("ARRAY_LIST")
