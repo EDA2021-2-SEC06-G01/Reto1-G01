@@ -182,8 +182,36 @@ def printTrasportarObras(resultado,tiempo):
     print("El tiempo tomado fue: " + str(tiempo) + " mseg")
 
 
-def printNuevaProposicion(anio_i,anio_f,area_disponible):
-    pass
+def printNuevaProposicion(lista,area,tiempo):
+    print("Para esta exposición se utilizaron "+ str(round(area,2)) + " m^2")
+    print("El total de obras es de " + str(lt.size(lista)))
+
+    print("Las primeras 5 obras de la lista son: ")
+    for i in range(0,5):
+        elemento = lt.getElement(lista,i)
+        artistas_list = ""
+        for artista in lt.iterator(elemento["Artistas"]):
+            artistas_list += artista["Nombre"] + " "
+        
+        mensaje = [elemento["Titulo"],artistas_list,elemento["Clasificacion"],elemento["Fecha"],elemento["Medio"],elemento["Dimensiones"]]
+        print(mensaje)
+
+    print("Las últimas 5 obras de la lista son: ") 
+    
+    for i in range(lt.size(lista)-5,lt.size(lista)):
+        elemento = lt.getElement(lista,i)
+        artistas_list = ""
+        for artista in lt.iterator(elemento["Artistas"]):
+            artistas_list += artista["Nombre"] + " "
+        
+        mensaje = [elemento["Titulo"],artistas_list,elemento["Clasificacion"],elemento["Fecha"],elemento["Medio"],elemento["Dimensiones"]]
+        print(mensaje)
+    
+    print("El tiempo tomado fue: " + str(tiempo) + " mseg")
+
+
+
+    
 
 def printMenu():
     print("Bienvenido")
@@ -262,12 +290,16 @@ while True:
 
     elif int(inputs[0]) == 6:
         anio_i = input("Ingrese el año inicial de las obras: ")
+        anio_i = anio_i.strip()
         anio_f = input("Ingrese el año final de las obras: ")
-        area_disponible = input("Ingrese cuanta area (m^2) esta disponible para los objetos planos (cudros y fotos): ")
-        anio_inicial = controller.proposicion_exposicion(catalog, anio_i)
-        anio_final = controller.proposicion_exposicion(catalog, anio_f)
-        area = controller.proposicion_exposicion(catalog, area_disponible)
-        printNuevaProposicion(anio_i,anio_f,area_disponible)
+        anio_f = anio_f.strip()
+        area_disponible = float(input("Ingrese cuanta area (m^2) esta disponible para los objetos planos: "))
+
+        start_time = time.process_time()
+        resultado = controller.proposicion_exposicion(anio_i,anio_f, area_disponible,catalog["Artwork"])
+        stop_time = time.process_time()
+        elapsed_time_mseg = (stop_time - start_time)*1000
+        printNuevaProposicion(resultado[0],resultado[1],elapsed_time_mseg)
     
     elif int(inputs[0])==7:
         break

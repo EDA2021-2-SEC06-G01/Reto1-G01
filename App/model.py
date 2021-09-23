@@ -217,4 +217,10 @@ def compare_price(artwork1,artwork2):
     else:
         return False
 
+def compare_fecha_crea(artwork1,artwork2):
+    if artwork1["Fecha"] < artwork2["Fecha"]:
+        return True
+    else:
+        return False
+
 # Funciones de ordenamiento

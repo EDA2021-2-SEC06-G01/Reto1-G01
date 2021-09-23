@@ -20,6 +20,7 @@
  * along withthis program.  If not, see <http://www.gnu.org/licenses/>.
  """
 
+from App.model import binary_search
 import config as cf
 import model
 import csv
@@ -221,6 +222,53 @@ def transporte_obras(departamento,datos):
 
 
     return lista,precio_acumulado,peso_acumulado,mas_costosas
+
+def proposicion_exposicion(anio_i,anio_f, area_disponible,datos):
+    datos = shellsort.sort(datos.copy(),model.compare_fecha_crea)
+    inicio = model.binary_search(datos,0,lt.size(datos),"Fecha",anio_i)
+    while inicio == -1:
+        anio_i += 1
+        inicio = model.binary_search(datos,0,lt.size(datos),"Fecha",anio_i)
+    
+    area_acumulada = 0
+    i = inicio
+    lista = lt.newList("ARRAY_LIST")
+
+    while lt.getElement(datos,i)["Fecha"] <= anio_f:
+        obra = lt.getElement(datos,i)
+
+        contador = 0
+        #Se buscan las obras en 2 dimensiones
+        if obra["Altura"] != 0:
+            contador += 1
+        if obra["Ancho"] != 0:
+            contador += 1
+        if obra["Profundidad"] != 0:
+            contador += 1
+        
+        if contador != 0 and contador < 3:
+            area1 = obra["Altura"]*obra["Ancho"]
+            area2 = obra["Altura"]*obra["Profundidad"]
+            area3 = obra["Profundidad"] * obra["Ancho"]
+
+            area = max(area1,area2,area3)
+
+            if area_acumulada + area < area_disponible:
+                area_acumulada += area
+                lt.addLast(lista,obra)
+            else:
+                break
+
+        i +=1
+
+    return lista,area_acumulada
+
+
+            
+            
+
+
+
 
 #def create_sublist(list,size):
     #if size < lt.size(list):
